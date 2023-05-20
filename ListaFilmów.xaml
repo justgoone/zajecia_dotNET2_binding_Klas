@@ -1,5 +1,5 @@
 ﻿<Window
-    x:Class="NET_PR2_1_z2.ListaOsób"
+    x:Class="NET_PR2_1_z2.ListaFilmów"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,26 +7,29 @@
     xmlns:local="clr-namespace:NET_PR2_1_z2"
     mc:Ignorable="d"
     
-    Title="ListaOsób"
+    Title="ListaFilmów"
     Height="550"
-    Width="400"
+    Width="414"
     FontSize="24"
     >
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="133"/>
+            <ColumnDefinition Width="133"/>
+            <ColumnDefinition Width="66"/>
+            <ColumnDefinition Width="66"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
             <RowDefinition/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
 
         <ListBox
+            Grid.Row="1"
             Name="Lista"
-            Grid.ColumnSpan="3"
-            ItemsSource="{Binding Osoby}"
+            Grid.ColumnSpan="4"
+            ItemsSource="{Binding Filmy}"
             >
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -37,22 +40,38 @@
         
         <Button
             Grid.Column="0"
-            Grid.Row="1" Click="Dodaj"
+            Grid.Row="2" Click="Dodaj"
             >
             Dodaj
         </Button>
         <Button
             Grid.Column="1"
-            Grid.Row="1"
+            Grid.Row="2"
             Click="Edytuj"
             >
             Edytuj
         </Button>
         <Button
             Grid.Column="2"
-            Grid.Row="1" Click="Usuń"
+            Grid.ColumnSpan="2"
+            Grid.Row="2" 
+            Click="Usuń"
             >
             Usuń
+        </Button>
+        <Button
+            Grid.Column="2"
+            FontSize="10" Click="Importuj"
+            
+            >
+            Importuj
+        </Button>
+        <Button
+            Grid.Column="3"
+            FontSize="10" Click="Eksportuj"
+            
+            >
+            Exportuj
         </Button>
     </Grid>
 </Window>

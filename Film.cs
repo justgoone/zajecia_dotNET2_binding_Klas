@@ -5,21 +5,18 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace NET_PR2_1_z2
 {
-    public class Osoba : INotifyPropertyChanged
+    public class Film : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
         private static Dictionary<string,ICollection<string>> powiązaneWłaściwości
             = new()
             {
-                ["Imię"] = new string[] { "ImięNazwisko" },
-                ["Nazwisko"] = new string[] { "ImięNazwisko" },
-                ["ImięNazwisko"] = new string[] { "FormatWitaj", "SkrótSzczegółów" },
-                ["DataUrodzenia"] = new string[] { "Wiek" },
-                ["DataŚmierci"] = new string[] { "Wiek" },
-                ["Wiek"] = new string[] { "SkrótSzczegółów" }
+                ["Tytuł"] = new string[] { "SkrótSzczegółów" },
+                ["Reżyser"] = new string[] { "SkrótSzczegółów" }
             };
         private void NotyfikujZmianę(
             [CallerMemberName] string? nazwaWłaściwości = null,
@@ -44,64 +41,74 @@ namespace NET_PR2_1_z2
         }
 
         private string
-            imię,
-            nazwisko
+            tytuł,
+            reżyser,
+            studio
             ;
-        private DateTime?
-            dataUrodzenia,
-            dataŚmierci
+        private TimeSpan
+            czasTrwania
             ;
+        private DateTime
+            dataWydania = DateTime.Today
+            ;
+        private int
+            wybranyNośnik
+            ;
+        public string Tytuł {
+            get => tytuł;
+            set
+            {
+                tytuł = value;
+                NotyfikujZmianę();
+            }
+        }
+        public string Reżyser {
+            get => reżyser;
+            set
+            {
+                reżyser = value;
+                NotyfikujZmianę();
+            }
+        }
 
-        public string Imię {
-            get => imię;
-            set
-            {
-                imię = value;
-                NotyfikujZmianę();
-            }
-        }
-        public string Nazwisko {
-            get => nazwisko;
-            set
-            {
-                nazwisko = value;
-                NotyfikujZmianę();
-            }
-        }
-        public DateTime? DataUrodzenia {
-            get => dataUrodzenia;
-            set
-            {
-                dataUrodzenia = value;
-                NotyfikujZmianę();
-            }
-        }
-        public DateTime? DataŚmierci {
-            get => dataŚmierci;
-            set
-            {
-                dataŚmierci = value;
-                NotyfikujZmianę();
-            }
-        }
-        
-        public string ImięNazwisko => $"{imię} {nazwisko}";
-        public string FormatWitaj => $"Witaj, {ImięNazwisko}!";
-        public ushort? Wiek
+        public string Studio
         {
-            get
+            get => studio;
+            set
             {
-                if (dataUrodzenia == null)
-                    return null;
-                DateTime? koniec;
-                if (dataŚmierci == null)
-                    koniec = DateTime.Now;
-                else
-                    koniec = dataŚmierci;
-                TimeSpan różnica = (TimeSpan)(koniec - dataUrodzenia);
-                return (ushort?)Math.Floor(różnica.Days / 365.25);
+                studio = value;
+                NotyfikujZmianę();
             }
         }
-        public string SkrótSzczegółów => $"{ImięNazwisko}, {Wiek} lat";
+
+        public DateTime? DataWydania {
+            get => dataWydania;
+            set
+            {
+                dataWydania = (DateTime)value;
+                NotyfikujZmianę();
+            }
+        }
+
+        public int WybranyNośnik {
+            get => wybranyNośnik;
+            set
+            {
+                wybranyNośnik = value;
+                NotyfikujZmianę();
+            }
+        }
+
+        public TimeSpan? CzasTrwania {
+            get => czasTrwania;
+            set
+            {
+                czasTrwania = (TimeSpan)value;
+                NotyfikujZmianę();
+            }
+        }
+
+
+        public string SkrótSzczegółów => $"'{Tytuł}' reż.: {Reżyser}";
     }
 }

@@ -18,14 +18,14 @@ namespace NET_PR2_1_z2
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class WidokOsoby : Window
+    public partial class WidokFilmu : Window
     {
-        //Osoba osoba;
-        public WidokOsoby(Osoba osoba)
+        //Film film;
+        public WidokFilmu(Film film)
         {
-            //this.osoba = osoba;
-            DataContext = osoba;
+            DataContext = film;
             InitializeComponent();
         }
+
     }
 }
